@@ -4,8 +4,12 @@
 #include "Window.h"
 
 
-Window::Window(const std::string& title, int width, int height) : title_(title), width_(width), height_(height) 
+Window::Window(const std::string& title, int width, int height) 
 {
+    title_ = title;
+	width_ = width;
+	height_ = height;
+    
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 	{
 		std::cerr << "Failed to initialize SDL" << std::endl;
