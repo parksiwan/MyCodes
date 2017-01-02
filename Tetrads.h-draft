@@ -1,0 +1,26 @@
+#pragma once
+
+#include "Window.h"
+#include <string>
+
+class Tetrads : public Window 
+{
+public:
+	Tetrads(const Window& window, int w, int h, int x, int y, int r, int g, int b, int type, int rotation);
+	Tetrads(const Window& window, int w, int h, int x, int y, const std::string& image_path, int type, int rotation);
+	~Tetrads();
+
+	void draw();
+	void pollEvents(SDL_Event& event);
+	void moveDown();
+	void rotateDown();
+
+private:
+	int w_, h_;
+	int x_, y_;
+	int type_, rotation_;       // _type : type of tetrads, _rotation : value of 4 different rotation
+	int r_, g_, b_, a_;
+	char tetrad_[5][5] = { {' '} };
+
+	SDL_Texture* tennis_texture_ = nullptr;
+};
