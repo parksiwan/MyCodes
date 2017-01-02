@@ -1,7 +1,7 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-#include <string.h>
+#include <string>
 #include <SDL.h>
 
 class Window 
@@ -15,15 +15,10 @@ public:
 	inline bool isClosed() const { return closed_; }
 
 private:
-	bool init();
-
-private:
 	std::string title_;
 	int width_ = 800;
 	int height_ = 600;
-
 	bool closed_ = false;
-
 	SDL_Window* window_ = nullptr;
 
 protected:
