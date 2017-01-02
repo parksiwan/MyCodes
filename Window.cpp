@@ -6,7 +6,7 @@
 
 Window::Window(const std::string& title, int width, int height) 
 {
-    title_ = title;
+        title_ = title;
 	width_ = width;
 	height_ = height;
     
