@@ -225,10 +225,43 @@ short tetrads[TYPE][ROTATION][HORIZONTAL][VERTICAL] =
 	}
 };
 
-Tetrads::Tetrads(int x, int y, int type, int rotation) 
+//start row & start X
+short startingRow[TYPE][ROTATION][1] =
 {
-	curX_ = x;
-	curY_ = y;
+	// Square block
+	{
+		{ 3 },{ 3 },{ 3 },{ 3 }
+	},
+	// I block
+	{
+		{ 2 },{ 4 },{ 2 },{ 3 }
+	},
+	// L block
+	{
+		{ 3 },{ 3 },{ 3 },{ 2 }
+	},
+	// L-mirrored block
+	{
+		{ 3 },{ 2 },{ 3 },{ 3 }
+	},
+	// N block
+	{
+		{ 3 },{ 3 },{ 3 },{ 2 }
+	},
+	// N-mirrored block
+	{
+		{ 3 },{ 3 },{ 3 },{ 2 }
+	},
+	// T block
+	{
+		{ 3 },{ 3 },{ 3 },{ 2 }
+	}
+};
+
+Tetrads::Tetrads(int type, int rotation) 
+{
+	curX_ = 5;
+	curY_ = (-1) * startingRow[type][rotation][0];
 	type_ = type;
 	rotation_ = rotation;
 	
@@ -251,10 +284,10 @@ void Tetrads::pollEvents(SDL_Event& event)
 		switch (event.key.keysym.sym) 
 		{
 			case SDLK_LEFT:
-				curX_ -= 20;
+				curX_ -= 1;
 				break;
 			case SDLK_RIGHT:
-				curX_ += 20;
+				curX_ += 1;
 				break;
 			case SDLK_UP:
 				if (rotation_ == 3)
@@ -263,18 +296,22 @@ void Tetrads::pollEvents(SDL_Event& event)
 					rotation_ += 1;
 				break;
 			case SDLK_DOWN:
-				curY_ += 10;
+				curY_ += 1;
 				break;
 		}
 	} 
 }
 
-void Tetrads::moveDown() 
+void Tetrads::movedownTedrads()
 {
-	curY_ += 20;
+	curY_ += 1;
 }
 
-void Tetrads::rotateDown()
+void Tetrads::updateTedrads()
 {
-	curY_ += 10;
+	for (int i = 0; i < HORIZONTAL; i++)
+	{
+		for (int j = 0; j < VERTICAL; j++)
+			tetrad_[i][j] = tetrads[type_][rotation_][i][j];
+	}
 }
