@@ -9,6 +9,7 @@ class Board : public Window
 public:
 	Board(const Window& window, int w, int h, int x, int y, int r, int g, int b, int a);
 	Board(const Window& window, int w, int h, int x, int y, int option);
+	Board(const Window& window, int w, int h, int x, int y, short** field);
 	~Board();
 
 	void draw();
