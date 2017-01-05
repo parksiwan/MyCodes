@@ -84,6 +84,11 @@ Board::Board(const Window& window, int w, int h, int x, int y, int option) : Win
 	SDL_QueryTexture(texture_, NULL, NULL, &w_, &h_);
 }
 	
+Board::Board(const Window& window, int w, int h, int x, int y, short** field) : Window(window)
+{
+
+}
+
 Board::~Board() 
 {
 	SDL_DestroyTexture(texture_);
@@ -102,3 +107,4 @@ void Board::draw()
 		SDL_RenderFillRect(renderer_, &board_rect);
 	}
 }
+
