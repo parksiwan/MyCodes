@@ -1,14 +1,14 @@
 #include <iostream>
 #include "Game.h"
 
-Game::Game(short level)
+Game::Game(int level)
 {
 	level_ = level;
 	lines_ = 0;
-	scores_ - 0;
-	for (int i = 0; i < FIELD_H; i++)
+	scores_ = 0;
+	for (int i = 0; i < F_HEIGHT; i++)
 	{
-		for (int j = 0; j < FIELD_V; j++)
+		for (int j = 0; j < F_WIDTH; j++)
 			field_[i][j] = 0;
 	}
 }
@@ -23,11 +23,18 @@ void Game::checkBoundary()
 
 }
 
-void Game::updateGame(Tetrads* tts, short x, short y, short startRow)
+void Game::updateGame(Tetrads* tts)
 {
-	for (int i = startRow; i < TETRAD_H; i++)
+	int firstRow;
+
+	if (tts->curY_ < 0)
+		firstRow = (-1) * tts->curY_;
+	else
+		firstRow = 0;
+
+	for (int i = firstRow; i < T_HEIGHT; i++)
 	{
-		for (int j = 0; j < TETRAD_V; j++)
-			field_[x + i][y + j] = tts->tetrad_[i][j];
+		for (int j = 0; j < T_WIDTH; j++)
+			field_[tts->curY_ + i][tts->curX_ + j] = tts->tetrad_[i][j];
 	}
 }
