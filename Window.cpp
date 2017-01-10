@@ -6,10 +6,10 @@
 
 Window::Window(const std::string& title, int width, int height) 
 {
-        title_ = title;
+	title_ = title;
 	width_ = width;
 	height_ = height;
-    
+
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 	{
 		std::cerr << "Failed to initialize SDL" << std::endl;
@@ -76,6 +76,6 @@ void Window::pollEvents(SDL_Event& event)
 void Window::clear() const 
 {
 	SDL_RenderPresent(renderer_);       //updates the screen with any rendering performed so far
-	SDL_SetRenderDrawColor(renderer_, 0, 0, 200, 255);  //sets the color used for drawing operation
+	SDL_SetRenderDrawColor(renderer_, 165, 105, 189, 255);  //sets the color used for drawing operation
 	SDL_RenderClear(renderer_);   //clears rendering target
 }
