@@ -4,6 +4,9 @@
 #include <string>
 #include <SDL.h>
 
+const int W_WIDTH = 800;
+const int W_HEIGHT = 600;
+
 class Window 
 {
 public:
@@ -16,8 +19,8 @@ public:
 
 private:
 	std::string title_;
-	int width_ = 800;
-	int height_ = 600;
+	int width_ = W_WIDTH;
+	int height_ = W_HEIGHT;
 	bool closed_ = false;
 	SDL_Window* window_ = nullptr;
 
