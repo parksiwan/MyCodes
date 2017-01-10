@@ -3,24 +3,23 @@
 
 #include "Tetrads.h"
 
-const short FIELD_H = 20;
-const short FIELD_V = 10;
-const short TETRAD_H = 5;
-const short TETRAD_V = 5;
+const short F_HEIGHT = 20;
+const short F_WIDTH = 10;
+const short T_HEIGHT = 5;
+const short T_WIDTH = 5;
 
 class Game
 {
+	friend class Board;
 public:
-	Game(short level);
+	Game(int level);
 	~Game();
 	void checkBoundary();
-	void updateGame(Tetrads* tts, short x, short y, short startRow);
+	void updateGame(Tetrads* tts);
 
 private:
 	int lines_;
 	int scores_;
-	short level_;
-	short field_[FIELD_H][FIELD_V] = { { 0 } };
+	int level_;
+	short field_[F_HEIGHT][F_WIDTH] = { { 0 } };
 };
-
-#endif
