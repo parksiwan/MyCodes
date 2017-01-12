@@ -14,7 +14,7 @@ class Game
 public:
 	Game(int level);
 	~Game();
-	void checkBoundary();
+	void checkMovement(Tetrads* tts);
 	void updateGame(Tetrads* tts);
 
 private:
@@ -23,3 +23,5 @@ private:
 	int level_;
 	short field_[F_HEIGHT][F_WIDTH] = { { 0 } };
 };
+
+#endif
