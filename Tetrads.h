@@ -4,6 +4,8 @@
 #include <iostream>
 #include "SDL.h"
 
+enum MOVING_DIRECTION { DOWN = 1, LEFT = 2, RIGHT = 3 };
+
 const short TYPE = 7;
 const short ROTATION = 4;
 const short HORIZONTAL = 5;
@@ -275,9 +277,12 @@ public:
 	void pollEvents(SDL_Event& event);
 	void movedownTedrads();
 	void updateTedrads();
-	inline bool isEnded() { return ended_; }
+	bool isEnded();
+	int getCurrentX();
+	int getCurrentY();
 private:
 	int curX_, curY_;
+	int direction_ = 0;         //1:down, 2:left, 3:right
 	int type_, rotation_;       //type_ : type of tetrads, rotation_ : value of 4 different rotation
 	short tetrad_[HORIZONTAL][VERTICAL] = { { 0 } };
 	bool ended_ = false;
