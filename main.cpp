@@ -14,8 +14,8 @@ bool pollEvents(Window& window, Tetrads* Tetrads)
 
 	if (SDL_PollEvent(&event)) 
 	{
-		Tetrads->pollEvents(event);
 		window.pollEvents(event);
+		Tetrads->pollEvents(event);
 		return true;
 	} 
 	else
@@ -40,14 +40,17 @@ void getTetrad(int type, int rotation, short tetrad[][VERTICAL])
 	}
 }
 
-int main(int argc, char* args[]) 
+//
+//!!!! Exception statement should be implemented!!!!
+//
+int main(int argc, char* args[])
 {
 	int curType, nextType, type;
 	short nTetrad[HORIZONTAL][VERTICAL] = { { 0 } };
 	Window window("AIT Tetris", W_WIDTH, W_HEIGHT);
 	Game* tGame = new Game(1);
 	Board gameBoard(window, 20, 20, 300, 200, colorImage[0], tGame);    //Display board and tetrads
-	
+
 	Board mainBoard(window, 200, 400, 300, 200, 255, 255, 255, 1);      //Display game main board
 	Board labelBoard(window, 50, 50, 300, 100, 1);                      //Label above the main board
 
@@ -57,49 +60,57 @@ int main(int argc, char* args[])
 
 	Board leftSubBoard(window, 100, 100, 100, 200, 255, 255, 255, 1);   //Sub board on the left
 	Board labelNext(window, 150, 50, 120, 170, 5);                      //"Next" label above the sub-board
+	Board next_Tetrads(window, 20, 20, 90, 190, colorImage[1]);
 
+	Tetrads* ptrTetrad = nullptr;
 	srand(time(NULL));
 	curType = rand() % TYPE;
 	while (!window.isClosed())
 	{
-		nextType = rand() % TYPE;
-		getTetrad(nextType, 0, nTetrad);
-		Board next_Tetrads(window, 20, 20, 100, 200, colorImage[nextType]);
-
-		type = curType;                                 //'type' is 'curType'
-		curType = nextType;                             //'nextType' will be 'curType' at next loop
-		Tetrads* ptrTetrad = new Tetrads(type, 0);      //A pointer to Tetrads is generated with the 'type'
-		while (!ptrTetrad->isEnded())
+		if (ptrTetrad == nullptr)
 		{
-			if (pollEvents(window, ptrTetrad) == true)
-			{
-				ptrTetrad->updateTedrads();
-			}
-			else
-			{
-				ptrTetrad->movedownTedrads();
-			}
-
-			ptrTetrad->movedownTedrads();
-			tGame->updateGame(ptrTetrad);
-						
-			labelBoard.draw();
-			labelLevel.draw();
-			labelScore.draw();
-			labelLines.draw();
-			labelNext.draw();
-			leftSubBoard.draw();
-			next_Tetrads.draw(nTetrad);
-			mainBoard.draw();
-
-			gameBoard.draw(tGame);
-
-			window.clear();
-			Sleep(200);
+			nextType = rand() % TYPE;
+			getTetrad(nextType, 0, nTetrad);
+			type = curType;                                 //'type' is 'curType'
+			curType = nextType;                             //'nextType' will be 'curType' at next loop
+			ptrTetrad = new Tetrads(type, 0);             //A pointer to Tetrads is generated with the 'type'
 		}
-		if (ptrTetrad != nullptr)
+														
+		if (pollEvents(window, ptrTetrad) == true)
+		{
+			ptrTetrad->updateTedrads();
+		}
+		else
+		{
+			ptrTetrad->movedownTedrads();
+		}
+
+		//ptrTetrad->movedownTedrads();
+		labelBoard.draw();
+		labelLevel.draw();
+		labelScore.draw();
+		labelLines.draw();
+		labelNext.draw();
+		leftSubBoard.draw();
+		next_Tetrads.draw(nTetrad);
+		mainBoard.draw();
+
+		tGame->checkMovement(ptrTetrad);
+		tGame->updateGame(ptrTetrad);
+		gameBoard.draw(tGame);
+
+		window.clear();
+		Sleep(200);
+
+		if (ptrTetrad->isEnded())
+		{
 			delete ptrTetrad;
+			ptrTetrad = nullptr;
+		}
+
 	}
 	delete tGame;
+	tGame = nullptr;
+	
 	return 0;
 }
