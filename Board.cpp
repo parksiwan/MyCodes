@@ -153,10 +153,8 @@ void Board::draw(short tt[][SB_WIDTH])
 				if (tt[i][j] != 0)
 				{
 					//each "ttRect" consists of a Tetrad
-					//std::cout << "x_ + = " << x_ << " " << "y_ = "  << y_ << std::endl;
 					SDL_Rect ttRect = { x_ + j * 20, y_ + i * 20, w_, h_ };
 					SDL_RenderCopy(renderer_, texture_, nullptr, &ttRect);
-					//std::cout << "i = " << i << "  " << "j= " << j << "  " << "tt[i][j] = " << tt[i][j] << std::endl;
 				}
 			}
 		}
@@ -179,10 +177,8 @@ void Board::draw(Game* g)
 				if (g->field_[i][j] != 0)
 				{
 					//each "ttRect" consists of a Tetrad
-					//std::cout << "x_ + = " << x_ << " " << "y_ = "  << y_ << std::endl;
 					SDL_Rect ttRect = { x_ + j * 20, y_ + i * 20, w_, h_ };
 					SDL_RenderCopy(renderer_, texture_, nullptr, &ttRect);
-					//std::cout << "i = " << i << "  " << "j= " << j << "  " << "tt[i][j] = " << tt[i][j] << std::endl;
 				}
 			}
 		}
@@ -193,5 +189,3 @@ void Board::draw(Game* g)
 		//SDL_RenderFillRect(renderer_, &ttRect);
 	}
 }
-
-
