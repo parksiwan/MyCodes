@@ -16,12 +16,17 @@ public:
 	~Game();
 	void checkMovement(Tetrads* tts);
 	void updateGame(Tetrads* tts);
+	bool isEnded();
+	bool foundCompletedRows();
+	void removeCompletedRows(int row);
+	void countScores();
 
 private:
-	int lines_;
-	int scores_;
-	int level_;
-	short field_[F_HEIGHT][F_WIDTH] = { { 0 } };
+	int lines_;                                     //accumulated number of rows(lines) completed
+	int scores_;                                    //score of game, calculated by 'lines_'
+	int level_;                                     //level of game, default is 1
+	int scoringRows_;                               //number of rows(lines) completed and to be counted as scores
+	short field_[F_HEIGHT][F_WIDTH] = { { 0 } };    //game field 10 X 20 array
 };
 
 #endif
