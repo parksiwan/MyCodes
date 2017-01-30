@@ -8,8 +8,7 @@ const short F_WIDTH = 10;
 const short T_HEIGHT = 5;
 const short T_WIDTH = 5;
 
-class Game
-{
+class Game {
 	friend class Board;
 public:
 	Game(int level);
@@ -20,6 +19,11 @@ public:
 	bool foundCompletedRows();
 	void removeCompletedRows(int row);
 	void countScores();
+	void increaseLevel();
+	void clearField();
+	int getLines();
+	int getScores();
+	int getLevels();
 
 private:
 	int lines_;                                     //accumulated number of rows(lines) completed
