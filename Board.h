@@ -12,7 +12,7 @@ const short RGB = 3;
 const std::string colorImage[TETRAD_TYPE + 1] =
 {
 	// Square block = light blue
-	"blue_piece.png",
+	"tpiece.png",
 	// I block = yellow
 	"green_piece.png",
 	// L block = viloet
@@ -29,11 +29,11 @@ const std::string colorImage[TETRAD_TYPE + 1] =
 	"white_piece.png"
 };
 
-class Board : public Window 
-{
+class Board : public Window {
 public:
 	Board(const Window& window, int w, int h, int x, int y, int r, int g, int b, int a);   //Normal rectangle shape
-	Board(const Window& window, int w, int h, int x, int y, int option);                   //Labels
+	Board(const Window& window, int w, int h, int x, int y, char* label);                   //Labels
+	Board(const Window& window, int w, int h, int x, int y);                   //Values
 	Board(const Window& window, int w, int h, int x, int y, const std::string& imagePath); //Next Tetrad
 	Board(const Window& window, int w, int h, int x, int y, const std::string& imagePath, Game* g);  //Game field
 	~Board();
@@ -41,12 +41,12 @@ public:
 	void draw();
 	void draw(short tt[][SB_WIDTH]);
 	void draw(Game* g);
+	void display(int values);
 
 private:
 	int w_, h_;
 	int x_, y_;
 	int r_, g_, b_, a_;
-	int option_ = 0;
 	SDL_Surface* label_ = nullptr;
 	SDL_Texture* texture_ = nullptr;
 };
