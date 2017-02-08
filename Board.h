@@ -1,3 +1,9 @@
+//
+//Header file : Board.h
+//Purpose     : Declaration of Board class
+//Features    : This class is involved in displaying all the entities on the window screen
+//              This class inherits from Window class
+//
 #ifndef BOARD_H
 #define BOARD_H
 
@@ -5,36 +11,27 @@
 #include "Game.h"
 #include <string>
 
+//SB_HEIGHT   : height of sub board
+//SB_WIDTH    : width of sub board
+//TETRAD_TYPE : number of types for tetrads
+//pieceImage  : image file name used to make tetrads
 const short SB_HEIGHT = 5;
 const short SB_WIDTH = 5;
 const short TETRAD_TYPE = 7;
-const short RGB = 3;
-const std::string colorImage[TETRAD_TYPE + 1] =
-{
-	// Square block = light blue
-	"tpiece.png",
-	// I block = yellow
-	"green_piece.png",
-	// L block = viloet
-	"red_piece.png",
-	// L-mirrored block = green
-	"yellow_piece.png",
-	// N block = grey + blank
-	"brown_piece.png",
-	// N-mirrored block = grey
-	"ruby_piece.png",
-	// T block = red
-	"darkgreen_piece.png",
-	//background = white
-	"white_piece.png"
-};
+const std::string pieceImage = "tpiece.png";
 
+//w_             : width of an entity to be drawn
+//h_             : height of an entity to be drawn;
+//x_, y_         : coordinition of top-left position of the entity
+//r_, g_, b_, a_ : color information of the entity
+//label_         : pointer to SDL_Surface struct
+//texture_       : pointer to SDL_Texture struct
 class Board : public Window {
 public:
-	Board(const Window& window, int w, int h, int x, int y, int r, int g, int b, int a);   //Normal rectangle shape
-	Board(const Window& window, int w, int h, int x, int y, char* label);                   //Labels
-	Board(const Window& window, int w, int h, int x, int y);                   //Values
-	Board(const Window& window, int w, int h, int x, int y, const std::string& imagePath); //Next Tetrad
+	Board(const Window& window, int w, int h, int x, int y, int r, int g, int b, int a);             //Normal rectangle shape
+	Board(const Window& window, int w, int h, int x, int y, char* label);                            //Labels
+	Board(const Window& window, int w, int h, int x, int y);                                         //Displayed number values
+	Board(const Window& window, int w, int h, int x, int y, const std::string& imagePath);           //Next Tetrad
 	Board(const Window& window, int w, int h, int x, int y, const std::string& imagePath, Game* g);  //Game field
 	~Board();
 
